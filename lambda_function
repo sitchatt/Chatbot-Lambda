@@ -21,18 +21,18 @@ def prepareResponse(event, msgText):
      
     return response
  
-def cancelIceCreamOrder(event):
+def cancelPizzaOrder(event):
     # Your order cancelation code here
     msgText = "Order has been canceled"
     return prepareResponse(event, msgText)
  
-def createIceCreamOrder(event):
+def createPizzaOrder(event):
       
      firstName = event['sessionState']['intent']['slots']['name']['value']['interpretedValue']
-     iceCreamFlavor = event['sessionState']['intent']['slots']['flavor']['value']['interpretedValue']
-     iceCreamSize = event['sessionState']['intent']['slots']['size']['value']['interpretedValue']
+     pizzaFlavor = event['sessionState']['intent']['slots']['flavor']['value']['interpretedValue']
+     pizzaSize = event['sessionState']['intent']['slots']['size']['value']['interpretedValue']
       
-     print(firstName, iceCreamFlavor, iceCreamSize)
+     print(firstName, pizzaFlavor, pizzaSize)
       
      discount = event['sessionState']['sessionAttributes']['discount']
       
@@ -40,7 +40,7 @@ def createIceCreamOrder(event):
       
      # Your custom order creation code here.
       
-     msgText = "Your Order for, " + str(iceCreamSize) + " " + str(iceCreamFlavor) + " IceCream has been placed with Order#: 342342"
+     msgText = "Your Order for, " + str(pizzaSize) + " " + str(pizzaFlavor) + " Pizza has been placed with Order#: 342342"
  
      return prepareResponse(event, msgText)   
       
@@ -50,9 +50,9 @@ def lambda_handler(event, context):
     response = None
          
     if intentName == 'CreateOrderIntent':
-        response = createIceCreamOrder(event)
+        response = createPizzaOrder(event)
     elif intentName == 'CancelOrderIntent':
-        response = cancelIceCreamOrder(event)
+        response = cancelPizzaOrder(event)
     else: 
         raise Exception('The intent : ' + intentName + ' is not supported')
     return response
